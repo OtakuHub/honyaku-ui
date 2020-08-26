@@ -10,6 +10,12 @@ cd honyaku-ui
 yarn install && yarn start
 ```
 
+## Desploy
+
+```bash
+yarn build && yarn deploy
+```
+
 ## Structure
 
 | folder     | description                                                |
