@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Filter from '../Filter';
-import Sort from '../Sorting';
+import Filter from '../../components/Filter';
+import Sort from '../../components/Sorting';
 import './style.sass';
 
 class Category extends Component {
