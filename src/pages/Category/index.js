@@ -26,9 +26,10 @@ class Category extends Component {
 
   render() {
     const { mostTreding, categoryList } = this.state;
+    const { match: { params } } = this.props;
     return (
       <div>
-        <h1>Anime</h1>
+        <h1>{params.categoryName}</h1>
         <div>
           <h2>Most Trending</h2>
           {mostTreding.map((item) => (
