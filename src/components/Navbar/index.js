@@ -24,17 +24,17 @@ class NavigationBar extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link>
-              <Link to="/anime">
+              <Link to="/category/anime">
                 Anime
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="manga">
+              <Link to="/category/manga">
                 manga
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="/lightnovel">
+              <Link to="/category/lightnovel">
                 Light Novel
               </Link>
             </Nav.Link>
