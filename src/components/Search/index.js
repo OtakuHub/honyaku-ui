@@ -23,7 +23,7 @@ class Search extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    history.push(`/search?${this.state.query}`);
+    history.push(`/search?query=${this.state.query}`);
     this.handleClose();
     this.setState({ query: '' });
   }
@@ -59,13 +59,20 @@ class Search extends Component {
               <Form.Group>
                 <Filter />
               </Form.Group>
-              <Button variant="outline-success" type="submit" onClick={this.handleSubmit}>
+              <Button
+                variant="outline-success"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
                 Search
               </Button>
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="outline-danger" onClick={this.handleClose}>
+            <Button
+              variant="outline-danger"
+              onClick={this.handleClose}
+            >
               Close
             </Button>
           </Modal.Footer>
