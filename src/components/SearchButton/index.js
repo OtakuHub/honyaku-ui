@@ -4,7 +4,7 @@ import history from '../../history';
 import Filter from '../Filter';
 import './style.sass';
 
-class Search extends Component {
+class SearchButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ class Search extends Component {
     return (
       <div>
         <Button
-          variant="outline-primary"
+          variant="warning"
           className="search"
           onClick={this.handleShow}
         >
@@ -82,4 +82,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default SearchButton;

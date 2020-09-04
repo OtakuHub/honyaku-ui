@@ -5,7 +5,7 @@ import Work from '../../pages/Work';
 import Category from '../../pages/Category';
 import Search from '../../pages/Search';
 import Navbar from '../Navbar';
-import SearchButton from '../Search';
+import SearchButton from '../SearchButton';
 import './style.sass';
 
 function App() {
