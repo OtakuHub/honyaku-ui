@@ -1,0 +1,48 @@
+{
+    "manga": [
+      {
+        "title": "Jujutsu Kaisen",
+        "image": "https://cover.mangabeast01.com/cover/Jujutsu-Kaisen.jpg",
+        "description": "Yuuji is a genius at track and field. But he has zero interest running around in circles, he's happy as a clam in the Occult Research Club. Although he's only in the club for kicks, things get serious when a real spirit shows up at school! Life's about to get really strange in Sugisawa Town #3 High School!",
+        "details": {
+          "author": "AKUTAMI Gege",
+          "status": "Ongoing (Scan), Ongoing (Publish)",
+          "Genre": "Action, Fantasy, School Life, Shounen, Supernatural",
+          "Released": "2018"
+        }
+      },
+      {
+        "title": "Gintama",
+        "image": "https://cover.mangabeast01.com/cover/Gintama.jpg",
+        "description": "Sakata Gintoki is a samurai living in an era when samurais are no longer needed. To add to his troubles, oppressive aliens have moved in to invade. Gintoki lives with Kagura and Shinpachi, taking on odd jobs to make the world a better place... and to pay their rent.",
+        "details": {
+          "author": "SORACHI Hideaki",
+          "status": "Complete (Scan), Complete (Publish)",
+          "Genre": "Action, Adventure, Comedy, Historical, Sci-fi, Shounen",
+          "Released": "2003"
+        }
+      },
+      {
+        "title": "Tsubasa to Hotaru",
+        "image": "https://cover.mangabeast01.com/cover/Tsubasa-To-Hotaru.jpg",
+        "description": "Sonokawa Tsubasa - 15 years old. A bubbly, energetic girl who's called 'stalker' by a lot of her classmates because she chases after the guy she wants relentlessly. After getting rejected by an upperclassman who saved her at the train station, she decides to help her childhood friend, Yuri, with her job as the basketball club's manager. There, she meets quiet, unobtrusive Akkey...",
+        "details": {
+          "author": "HARUTA Nana",
+          "status": "Ongoing (Scan), Ongoing (Publish)",
+          "Genre": "Comedy, Romance, School Life, Shoujo",
+          "Released": "2013"
+        }
+      },
+      {
+        "title": "Souboutei Kowasu Beshi",
+        "image": "https://cover.mangabeast01.com/cover/Souboutei-Kowasu-Beshi.jpg",
+        "description": "A mysterious mansion has towered proudly over the Tokyo district of Numanakarai since the Taisho period. Those who enter either never escape, or leave having experienced horrors untold, and with the desire to take revenge.",
+        "details": {
+          "author": "FUJITA Kazuhiro",
+          "status": "Ongoing (Scan), Ongoing (Publish)",
+          "Genre": "Action, Adventure, Horror, Shounen, Supernatural",
+          "Released": "2016"
+        }
+      }
+    ]
+  }
