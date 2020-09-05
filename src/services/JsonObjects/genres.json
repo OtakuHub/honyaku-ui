@@ -1,0 +1,56 @@
+{
+    "genres": [
+      {
+        "id": "1",
+        "genre": "Action"
+      },
+      {
+        "id": "2",
+        "genre": "Adventure"
+      },
+      {
+        "id": "3",
+        "genre": "Comedy"
+      },
+      {
+        "id": "4",
+        "genre": "Drama"
+      },
+      {
+        "id": "5",
+        "genre": "Slice of Life"
+      },
+      {
+        "id": "6",
+        "genre": "Fantasy"
+      },
+      {
+        "id": "7",
+        "genre": "Magic"
+      },
+      {
+        "id": "8",
+        "genre": "Supernatural"
+      },
+      {
+        "id": "9",
+        "genre": "Horror"
+      },
+      {
+        "id": "10",
+        "genre": "Mystery"
+      },
+      {
+        "id": "11",
+        "genre": "Psychological"
+      },
+      {
+        "id": "12",
+        "genre": "Romance"
+      },
+      {
+        "id": "13",
+        "genre": "Sci-Fi"
+      }
+    ]
+  }
