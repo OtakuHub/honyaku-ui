@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
+import api from '../../services/api';
 import WorkCard from '../../components/WorkCard';
+import query from '../../services/searchPage';
 
 class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
-      results: [
-        { id: '29839487' },
-        { id: '29389482' },
-        { id: '29839485' },
-        { id: '20348409' },
-        { id: '29834489' },
-      ]
+      searchQuery: '',
+      results: [],
+      hasLoaded: false,
     };
   }
 
@@ -28,20 +25,45 @@ class Search extends Component {
 
   getSearchQuery() {
     const { search } = this.props.location;
-    const query = new URLSearchParams(search).get('query');
-    this.setState({ query });
+    const searchQuery = new URLSearchParams(search).get('query');
+    this.setState({ searchQuery }, () => {
+      this.getSearchResults();
+    });
+  }
+
+  async getSearchResults() {
+    try {
+      const variables = { query: this.state.searchQuery };
+      const response = await api.post('/', {
+        query,
+        variables,
+      });
+      const results = response.data.data.Page.media;
+      this.setState({ results, hasLoaded: true });
+    } catch (error) {
+      this.setState({ error });
+    }
   }
 
   render() {
-    const { query, results } = this.state;
+    const { error, searchQuery, hasLoaded, results } = this.state;
     return (
       <div className="">
         <h4>
           Search Results:
-          <span>{query}</span>
+          <span>{searchQuery}</span>
         </h4>
+        {error && <p>{error.message}</p>}
+        {!hasLoaded && <p>Loading</p>}
         {results.map((work) => (
-          <WorkCard key={work.id} id={work.id} />
+          <WorkCard
+            key={work.id}
+            id={work.id}
+            title={work.title.romaji}
+            coverImage={work.coverImage.large}
+            genres={work.genres.join(', ')}
+            description={work.description}
+          />
         ))}
       </div>
     );
