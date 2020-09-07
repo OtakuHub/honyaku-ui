@@ -1,61 +1,94 @@
 import React, { Component } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import WorkCard from '../../components/WorkCard';
+import getTrendingForHomepage from '../../services/queries/homePage';
 import './style.sass';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animes: [
-        { id: '29839287' },
-        { id: '29389e82' },
-        { id: '29839285' },
-        { id: '20348209' },
-        { id: '29834289' },
-      ],
-      mangas: [
-        { id: '29439287' },
-        { id: '29589e82' },
-        { id: '29639285' },
-        { id: '20148209' },
-        { id: '29434289' },
-      ],
-      lightnovels: [
-        { id: '29839487' },
-        { id: '29389482' },
-        { id: '29839485' },
-        { id: '20348409' },
-        { id: '29834489' },
-      ],
+      error: null,
+      hasLoaded: false,
+      anime: [],
+      manga: [],
+      lightnovel: [],
     };
   }
 
+  componentDidMount() {
+    this.getTrendingMedia();
+  }
+
+  async getTrendingMedia() {
+    const response = await getTrendingForHomepage();
+    if (response.error) {
+      return this.setState({
+        error: response.error,
+        hasLoaded: true,
+      });
+    }
+    const { anime, manga, lightnovel } = response;
+    return this.setState({
+      anime,
+      manga,
+      lightnovel,
+      hasLoaded: true,
+    });
+  }
+
   render() {
-    const { animes, mangas, lightnovels } = this.state;
+    const { error, anime, manga, lightnovel, hasLoaded } = this.state;
+    if (!hasLoaded) {
+      return (<p>Loading content</p>);
+    }
+    if (error) {
+      return (<p>{error}</p>);
+    }
     return (
       <Container fluid>
         <div className="section">
           <h4>Light Novels</h4>
           <Row>
-            {lightnovels.map((novel) => (
-              <WorkCard key={novel.id} id={novel.id} />
+            {lightnovel.map((work) => (
+              <WorkCard
+                key={work.id}
+                id={work.id}
+                title={work.title.romaji}
+                coverImage={work.coverImage.large}
+                genres={work.genres.join(', ')}
+                description={work.description}
+              />
             ))}
           </Row>
         </div>
         <div className="section">
           <h4>Manga</h4>
           <Row>
-            {mangas.map((manga) => (
-              <WorkCard key={manga.id} id={manga.id} />
+            {manga.map((work) => (
+              <WorkCard
+                key={work.id}
+                id={work.id}
+                title={work.title.romaji}
+                coverImage={work.coverImage.large}
+                genres={work.genres.join(', ')}
+                description={work.description}
+              />
             ))}
           </Row>
         </div>
         <div className="section">
           <h4>Anime</h4>
           <Row>
-            {animes.map((anime) => (
-              <WorkCard key={anime.id} id={anime.id} />
+            {anime.map((work) => (
+              <WorkCard
+                key={work.id}
+                id={work.id}
+                title={work.title.romaji}
+                coverImage={work.coverImage.large}
+                genres={work.genres.join(', ')}
+                description={work.description}
+              />
             ))}
           </Row>
         </div>

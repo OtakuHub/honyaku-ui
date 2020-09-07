@@ -14,7 +14,7 @@ const WorkCard = ({ id, title, coverImage, description, genres }) => (
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>{genres}</Card.Subtitle>
         <Card.Text
-          dangerouslySetInnerHTML={{ __html: description }}
+          dangerouslySetInnerHTML={{ __html: description.substring(0, 100) }}
         />
         <Card.Link>
           <Link to={`/work/${id}`}>Read More</Link>
