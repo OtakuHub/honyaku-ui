@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import api from '../../services/api';
 import WorkCard from '../../components/WorkCard';
-import query from '../../services/searchPage';
+import getSearchResults from '../../services/queries/searchPage';
 
 class Search extends Component {
   constructor(props) {
@@ -14,35 +13,35 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    this.getSearchQuery();
+    this.getSearchQueryFromURL();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
-      this.getSearchQuery();
+      this.getSearchQueryFromURL();
     }
   }
 
-  getSearchQuery() {
+  getSearchQueryFromURL() {
     const { search } = this.props.location;
     const searchQuery = new URLSearchParams(search).get('query');
     this.setState({ searchQuery }, () => {
-      this.getSearchResults();
+      this.handleSearch();
     });
   }
 
-  async getSearchResults() {
-    try {
-      const variables = { query: this.state.searchQuery };
-      const response = await api.post('/', {
-        query,
-        variables,
+  async handleSearch() {
+    const response = await getSearchResults(this.state.searchQuery);
+    if (response.error) {
+      return this.setState({
+        error: response.error,
+        hasLoaded: true,
       });
-      const results = response.data.data.Page.media;
-      this.setState({ results, hasLoaded: true });
-    } catch (error) {
-      this.setState({ error });
     }
+    return this.setState({
+      results: response.results,
+      hasLoaded: true,
+    });
   }
 
   render() {
