@@ -1,9 +1,10 @@
 import api from '../api';
 
 const query = `
-  query($search: String) {
-    Page(perPage: 10) {
-      media(search: $search) {
+  query($mediaType: MediaType) {
+    Page(perPage: 20) {
+      media(type: $mediaType, sort: TRENDING_DESC) {
+        type
         id
         title {
           romaji
@@ -20,9 +21,9 @@ const query = `
   }
 `;
 
-const getSearchResults = async (search) => {
+const getCategoryWork = async (mediaType) => {
   try {
-    const variables = { search };
+    const variables = { mediaType };
     const response = await api.post('/', {
       query,
       variables,
@@ -40,4 +41,4 @@ const getSearchResults = async (search) => {
   }
 };
 
-export default getSearchResults;
+export default getCategoryWork;

@@ -39,12 +39,17 @@ const getTrendingForHomepage = async () => {
   try {
     const response = await api.post('/', { query });
     return {
+      error: null,
       anime: response.data.data.anime.media,
       manga: response.data.data.manga.media,
       lightnovel: response.data.data.lightnovel.media,
+      hasLoaded: true,
     };
   } catch (error) {
-    return { error };
+    return {
+      error,
+      hasLoaded: true,
+    };
   }
 };
 
