@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import WorkCard from '../../components/WorkCard';
+import WorkCardList from '../../components/WorkCardList';
 import getSearchResults from '../../services/queries/searchPage';
 
 class Search extends Component {
@@ -32,16 +32,7 @@ class Search extends Component {
 
   async handleSearch() {
     const response = await getSearchResults(this.state.searchQuery);
-    if (response.error) {
-      return this.setState({
-        error: response.error,
-        hasLoaded: true,
-      });
-    }
-    return this.setState({
-      results: response.results,
-      hasLoaded: true,
-    });
+    return this.setState({ ...response });
   }
 
   render() {
@@ -54,16 +45,7 @@ class Search extends Component {
         </h4>
         {error && <p>{error.message}</p>}
         {!hasLoaded && <p>Loading</p>}
-        {results.map((work) => (
-          <WorkCard
-            key={work.id}
-            id={work.id}
-            title={work.title.romaji}
-            coverImage={work.coverImage.large}
-            genres={work.genres.join(', ')}
-            description={work.description}
-          />
-        ))}
+        <WorkCardList workList={results} />
       </div>
     );
   }

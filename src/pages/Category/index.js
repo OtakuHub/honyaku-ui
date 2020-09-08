@@ -1,58 +1,62 @@
 import React, { Component } from 'react';
+import { Jumbotron, Container } from 'react-bootstrap';
 import Filter from '../../components/Filter';
 import Sort from '../../components/Sorting';
+import WorkCardList from '../../components/WorkCardList';
+import getCategoryWork from '../../services/queries/categoryPage';
 import './style.sass';
 
 class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mostTreding: [
-        'anime 1',
-        'anime 2',
-        'anime 3',
-        'anime 4',
-        'anime 5',
-      ],
-      categoryList: [
-        {
-          img: '',
-          title: '',
-          description: '',
-        },
-      ],
+      hasLoaded: false,
+      results: [],
     };
   }
 
-  render() {
-    const { mostTreding, categoryList } = this.state;
+  componentDidMount() {
+    this.getTrendingMedia();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.getTrendingMedia();
+    }
+  }
+
+  async getTrendingMedia() {
     const { match: { params } } = this.props;
+    const workType = params.categoryName.toUpperCase();
+    const response = await getCategoryWork(workType);
+    return this.setState({ ...response });
+  }
+
+  render() {
+    const { error, hasLoaded, results } = this.state;
+    const { match: { params } } = this.props;
+
+    if (!hasLoaded) {
+      return (<p>Loading</p>);
+    }
+
+    if (error) {
+      return (<p>{error.message}</p>);
+    }
+
     return (
       <div>
-        <h1>{params.categoryName}</h1>
-        <div>
-          <h2>Most Trending</h2>
-          {mostTreding.map((item) => (
-            <div>
-              <p>{item}</p>
-            </div>
-          ))}
-        </div>
+        <Jumbotron>
+          <Container>
+            <h1>
+              Most trending:&nbsp;
+              <span>{params.categoryName}</span>
+            </h1>
+          </Container>
+        </Jumbotron>
         <Filter />
         <Sort />
-        <div>
-          {categoryList.map((item) => (
-            <div>
-              <figure>
-                <img src={item.img} alt="" />
-                <figcaption>{item.title}</figcaption>
-              </figure>
-              <div>
-                <p>{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <WorkCardList workList={results} />
       </div>
     );
   }
