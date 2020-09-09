@@ -1,48 +1,51 @@
 import React, { Component } from 'react';
-import WorkCard from '../../components/WorkCard';
+import WorkCardList from '../../components/WorkCardList';
+import getSearchResults from '../../services/queries/searchPage';
 
 class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
-      results: [
-        { id: '29839487' },
-        { id: '29389482' },
-        { id: '29839485' },
-        { id: '20348409' },
-        { id: '29834489' },
-      ]
+      searchQuery: '',
+      results: [],
+      hasLoaded: false,
     };
   }
 
   componentDidMount() {
-    this.getSearchQuery();
+    this.getSearchQueryFromURL();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
-      this.getSearchQuery();
+      this.getSearchQueryFromURL();
     }
   }
 
-  getSearchQuery() {
+  getSearchQueryFromURL() {
     const { search } = this.props.location;
-    const query = new URLSearchParams(search).get('query');
-    this.setState({ query });
+    const searchQuery = new URLSearchParams(search).get('query');
+    this.setState({ searchQuery }, () => {
+      this.handleSearch();
+    });
+  }
+
+  async handleSearch() {
+    const response = await getSearchResults(this.state.searchQuery);
+    return this.setState({ ...response });
   }
 
   render() {
-    const { query, results } = this.state;
+    const { error, searchQuery, hasLoaded, results } = this.state;
     return (
       <div className="">
         <h4>
           Search Results:
-          <span>{query}</span>
+          <span>{searchQuery}</span>
         </h4>
-        {results.map((work) => (
-          <WorkCard key={work.id} id={work.id} />
-        ))}
+        {error && <p>{error.message}</p>}
+        {!hasLoaded && <p>Loading</p>}
+        <WorkCardList workList={results} />
       </div>
     );
   }
