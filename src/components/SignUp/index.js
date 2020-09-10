@@ -9,8 +9,12 @@ class Signup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleChange({ target }) {
+    const { value } = target;
+    const { name } = target;
+    this.setState({
+      [name]: value,
+    });
   }
 
   handleSubmit(event) {
@@ -20,36 +24,72 @@ class Signup extends Component {
   }
 
   render() {
-    const { value } = this.state;
+    const {
+      username, email, password, confirmPassword,
+    } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        onSubmit={this.handleSubmit}
+      >
         <h3>Sign Up</h3>
 
         <div>
-          <label htmlFor="username">
+          <label
+            htmlFor="username"
+          >
             Username
-            <input type="text" value={value} onChange={this.handleChange} placeholder="Username" />
+            <input
+              type="text"
+              value={username}
+              onChange={this.handleChange}
+              placeholder="Username"
+              name="username"
+            />
           </label>
         </div>
 
         <div>
-          <label htmlFor="email">
+          <label
+            htmlFor="email"
+          >
             Email address
-            <input type="email" placeholder="Enter email" />
+            <input
+              type="email"
+              value={email}
+              onChange={this.handleChange}
+              placeholder="Enter email"
+              name="email"
+            />
           </label>
         </div>
 
         <div>
-          <label htmlFor="password">
+          <label
+            htmlFor="password"
+          >
             Password
-            <input type="password" placeholder="Enter password" />
+            <input
+              type="password"
+              value={password}
+              onChange={this.handleChange}
+              placeholder="Enter password"
+              name="password"
+            />
           </label>
         </div>
 
         <div>
-          <label htmlFor="confirm_password">
+          <label
+            htmlFor="confirm_password"
+          >
             Confirm Password
-            <input type="password" placeholder="Confirm password" />
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={this.handleChange}
+              placeholder="Confirm password"
+              name="confirmPassword"
+            />
           </label>
         </div>
 

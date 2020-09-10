@@ -9,8 +9,12 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleChange({ target }) {
+    const { value } = target;
+    const { name } = target;
+    this.setState({
+      [name]: value,
+    });
   }
 
   handleSubmit(event) {
@@ -20,29 +24,50 @@ class Login extends Component {
   }
 
   render() {
-    const { value } = this.state;
+    const { useremail, password, checked } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <h3>Sign In</h3>
 
         <div>
-          <label htmlFor="username">
+          <label
+            htmlFor="username"
+          >
             Username/Email address
-            <input type="email" value={value} onChange={this.handleChange} placeholder="Enter username or email address" />
+            <input
+              type="email"
+              value={useremail}
+              onChange={this.handleChange}
+              placeholder="Enter username or email address"
+            />
           </label>
         </div>
 
         <div>
-          <label htmlFor="password">
+          <label
+            htmlFor="password"
+          >
             Password
-            <input type="password" placeholder="Enter password" />
+            <input
+              type="password"
+              value={password}
+              onChange={this.handleChange}
+              placeholder="Enter password"
+            />
           </label>
         </div>
 
         <div>
           <div>
-            <label htmlFor="customCheckbox">
-              <input type="checkbox" id="customCheckbox" />
+            <label
+              htmlFor="customCheckbox"
+            >
+              <input
+                type="checkbox"
+                id="customCheckbox"
+                value={checked}
+                onChange={this.handleChange}
+              />
               Remember me
             </label>
           </div>
