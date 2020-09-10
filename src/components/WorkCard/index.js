@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import handleNavigation from '../../helper/navigation';
 
 const WorkCard = ({ id, title, coverImage, description, genres }) => (
-  <Card style={{ minWidth: '15rem', marginTop: '1rem' }}>
+  <Card style={{ minWidth: '15rem', marginTop: '1rem', cursor: 'pointer' }} >
     <Card.Img
       style={{ height: '15rem', objectFit: 'cover' }}
       variant="top"
@@ -19,10 +19,12 @@ const WorkCard = ({ id, title, coverImage, description, genres }) => (
       <Card.Text
         dangerouslySetInnerHTML={{ __html: description.substring(0, 100) }}
       />
-      <Card.Link>
-        <Link to={`/work/${id}`}>
-          Read More
-        </Link>
+      <Card.Link
+        href="#"
+        data-url={`/work/${id}`}
+        onClick={handleNavigation}
+      >
+        Read More
       </Card.Link>
     </Card.Body>
   </Card>

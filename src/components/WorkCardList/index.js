@@ -5,7 +5,7 @@ import WorkCard from '../WorkCard';
 const WorkCardList = ({ workList }) => (
   <Row>
     {workList.map((work) => (
-      <Col>
+      <Col key={work.id}>
         <WorkCard
           key={work.id}
           id={work.id}
