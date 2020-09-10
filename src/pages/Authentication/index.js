@@ -12,16 +12,26 @@ class Authentication extends Component {
     this.state = {
       show: false,
     };
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
-  handleShow = () => this.setState({ show: true });
+  handleShow(event) {
+    event.preventDefault();
+    this.setState({ show: true });
+  }
 
-  handleClose = () => this.setState({ show: false });
+  handleClose(event) {
+    event.preventDefault();
+    this.setState({ show: false });
+  }
 
   render() {
     const { show } = this.state;
     return (
       <Nav.Link onClick={this.handleShow}>
+        SignIn/SignUp
         <Modal
           show={show}
           onHide={this.handleClose}
