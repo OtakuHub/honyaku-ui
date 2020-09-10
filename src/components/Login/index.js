@@ -1,37 +1,30 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = {
+      email: '',
+      password: '',
+      checked: false,
+    };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleChange({ target }) {
-    const { value } = target;
-    const { name } = target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
   handleSubmit(event) {
-    const { value } = this.state;
-    alert(`Username ${value} has logged in.`);
+    const { email } = this.state;
+    alert(`Username ${email} has logged in.`);
     event.preventDefault();
   }
 
-  handleInputChange(event) {
-    const { target } = event;
+  handleInputChange({ target }) {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const { name } = target;
 
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ [name]: value });
   }
 
   render() {
@@ -41,14 +34,12 @@ class Login extends Component {
         <h3>Sign In</h3>
 
         <div>
-          <label
-            htmlFor="username"
-          >
+          <label htmlFor="email">
             Username/Email address
             <input
-              type="email"
+              type="text"
               value={email}
-              onChange={this.handleChange}
+              onChange={this.handleInputChange}
               placeholder="Enter username or email address"
               name="email"
             />
@@ -56,14 +47,12 @@ class Login extends Component {
         </div>
 
         <div>
-          <label
-            htmlFor="password"
-          >
+          <label htmlFor="password">
             Password
             <input
               type="password"
               value={password}
-              onChange={this.handleChange}
+              onChange={this.handleInputChange}
               placeholder="Enter password"
               name="password"
             />
@@ -72,9 +61,7 @@ class Login extends Component {
 
         <div>
           <div>
-            <label
-              htmlFor="customCheckbox"
-            >
+            <label htmlFor="customCheckbox">
               <input
                 type="checkbox"
                 id="customCheckbox"
@@ -91,7 +78,7 @@ class Login extends Component {
         <p>
           Forgot
           {' '}
-          <a href="/password">password?</a>
+          <Link to="/password">password ?</Link>
         </p>
       </form>
     );

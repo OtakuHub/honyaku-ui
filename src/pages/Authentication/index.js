@@ -12,7 +12,6 @@ class Authentication extends Component {
     this.state = {
       show: false,
     };
-
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -22,16 +21,20 @@ class Authentication extends Component {
     this.setState({ show: true });
   }
 
-  handleClose(event) {
-    event.preventDefault();
+  handleClose() {
     this.setState({ show: false });
   }
 
   render() {
     const { show } = this.state;
     return (
-      <Nav.Link onClick={this.handleShow}>
-        SignIn/SignUp
+      <>
+        <Nav.Link
+          href="#"
+          onClick={this.handleShow}
+        >
+          SignIn/SignUp
+        </Nav.Link>
         <Modal
           show={show}
           onHide={this.handleClose}
@@ -67,7 +70,7 @@ class Authentication extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </Nav.Link>
+      </>
     );
   }
 }
