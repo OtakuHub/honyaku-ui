@@ -27,7 +27,7 @@ class Login extends Component {
   handleInputChange(event) {
     const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const { name } = target.name;
+    const { name } = target;
   }
 
   render() {
