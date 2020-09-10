@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import './style.sass';
+import Authentication from '../../pages/Authentication';
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -49,9 +50,7 @@ class NavigationBar extends Component {
             )}
             {!loggedIn && (
               <Nav.Link>
-                <Link to="/authentication">
-                  Signup
-                </Link>
+                <Authentication />
               </Nav.Link>
             )}
           </Nav>
