@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, Tab, Tabs, Modal,
+  Button, Tab, Tabs, Modal, Nav,
 } from 'react-bootstrap';
 import Login from '../../components/Login';
 import Signup from '../../components/SignUp';
@@ -21,13 +21,7 @@ class Authentication extends Component {
   render() {
     const { show } = this.state;
     return (
-      <div>
-        <Button
-          className="signup"
-          onClick={this.handleShow}
-        >
-          Login/SignUp
-        </Button>
+      <Nav.Link onClick={this.handleShow}>
         <Modal
           show={show}
           onHide={this.handleClose}
@@ -63,7 +57,7 @@ class Authentication extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+      </Nav.Link>
     );
   }
 }

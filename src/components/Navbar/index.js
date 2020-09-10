@@ -49,9 +49,7 @@ class NavigationBar extends Component {
               </Nav.Link>
             )}
             {!loggedIn && (
-              <Nav.Link>
-                <Authentication />
-              </Nav.Link>
+            <Authentication />
             )}
           </Nav>
         </Navbar.Collapse>
