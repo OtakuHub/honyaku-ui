@@ -7,6 +7,7 @@ class Login extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleChange({ target }) {
@@ -23,8 +24,14 @@ class Login extends Component {
     event.preventDefault();
   }
 
+  handleInputChange(event) {
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target.name;
+  }
+
   render() {
-    const { useremail, password, checked } = this.state;
+    const { email, password, checked } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <h3>Sign In</h3>
@@ -36,9 +43,10 @@ class Login extends Component {
             Username/Email address
             <input
               type="email"
-              value={useremail}
+              value={email}
               onChange={this.handleChange}
               placeholder="Enter username or email address"
+              name="email"
             />
           </label>
         </div>
@@ -53,6 +61,7 @@ class Login extends Component {
               value={password}
               onChange={this.handleChange}
               placeholder="Enter password"
+              name="password"
             />
           </label>
         </div>
@@ -66,7 +75,8 @@ class Login extends Component {
                 type="checkbox"
                 id="customCheckbox"
                 value={checked}
-                onChange={this.handleChange}
+                onChange={this.handleInputChange}
+                name="checked"
               />
               Remember me
             </label>
