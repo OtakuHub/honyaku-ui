@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from '../../components/Loading';
 import WorkCardList from '../../components/WorkCardList';
 import getSearchResults from '../../services/queries/searchPage';
 
@@ -37,14 +38,18 @@ class Search extends Component {
 
   render() {
     const { error, searchQuery, hasLoaded, results } = this.state;
+    if (!hasLoaded) {
+      return (<Loading />);
+    }
+    if (error) {
+      return (<p>{error.message}</p>);
+    }
     return (
       <div className="">
         <h4>
           Search Results:
           <span>{searchQuery}</span>
         </h4>
-        {error && <p>{error.message}</p>}
-        {!hasLoaded && <p>Loading</p>}
         <WorkCardList workList={results} />
       </div>
     );

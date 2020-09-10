@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Jumbotron, Container } from 'react-bootstrap';
+import Loading from '../../components/Loading';
 import Filter from '../../components/Filter';
 import Sort from '../../components/Sorting';
 import WorkCardList from '../../components/WorkCardList';
@@ -37,7 +38,7 @@ class Category extends Component {
     const { match: { params } } = this.props;
 
     if (!hasLoaded) {
-      return (<p>Loading</p>);
+      return (<Loading />);
     }
 
     if (error) {
@@ -49,8 +50,7 @@ class Category extends Component {
         <Jumbotron>
           <Container>
             <h1>
-              Most trending:&nbsp;
-              <span>{params.categoryName}</span>
+              {`Most trending: ${params.categoryName}`}
             </h1>
           </Container>
         </Jumbotron>
