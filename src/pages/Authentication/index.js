@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Button, Tab, Tabs, Modal, Nav,
+  Button, Tab, Modal, Nav, Tabs,
 } from 'react-bootstrap';
 import Login from '../../components/Login';
 import Signup from '../../components/SignUp';
-import './style.sass';
 
 class Authentication extends Component {
   constructor(props) {
@@ -45,6 +44,13 @@ class Authentication extends Component {
           </Modal.Header>
           <Modal.Body>
             <Tabs
+              tabPosition="top"
+              tabBarGutter={100}
+              style={{
+                flex: 0,
+                flexDirection: 'row',
+                width: 50,
+              }}
               id="controltab"
               defaultActiveKey="login"
             >
