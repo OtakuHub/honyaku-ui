@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
+import handleNavigation from '../../helper/navigation';
 import './style.sass';
 import Authentication from '../../pages/Authentication';
 
@@ -9,48 +9,47 @@ class NavigationBar extends Component {
     super(props);
     this.state = {
       loggedIn: false,
+      categories: [
+        { link: '/category/anime', name: 'Anime' },
+        { link: '/category/manga', name: 'Manga' },
+        { link: '/category/lightnovel', name: 'Light Novel' },
+      ],
     };
   }
 
   render() {
-    const { loggedIn } = this.state;
+    const { loggedIn, categories } = this.state;
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand>
-          <Link to="/">
-            Honyaku
-          </Link>
+        <Navbar.Brand
+          href="#"
+          data-url="/"
+          onClick={handleNavigation}
+        >
+          Honyaku
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link>
-              <Link to="/category/anime">
-                Anime
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/category/manga">
-                manga
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/category/lightnovel">
-                Light Novel
-              </Link>
-            </Nav.Link>
+            {categories.map((category) => (
+              <Nav.Link
+                key={category.name}
+                href="#"
+                data-url={category.link}
+                onClick={handleNavigation}
+              >
+                {category.name}
+              </Nav.Link>
+            ))}
           </Nav>
           <Nav className="justify-content-end">
-            {loggedIn && (
-              <Nav.Link>
-                <Link to="/logout">
-                  Logout
-                </Link>
-              </Nav.Link>
-            )}
-            {!loggedIn && (
-            <Authentication />
-            )}
+            <Nav.Link
+              href="#"
+              data-url={loggedIn ? '/logout' : '/authentication'}
+              onClick={handleNavigation}
+            >
+              {loggedIn ? 'Logout' : 'Sign up'}
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

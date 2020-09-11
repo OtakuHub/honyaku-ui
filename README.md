@@ -23,3 +23,8 @@ yarn build && yarn deploy
 | components | individual components needed to build a page               |
 | pages      | a complete page rendered by the router with all components |
 | services   | setup api requests and any helper functions                |
+
+## API
+
+At the moment we use a graphql API to feed the front end with data as close
+to reality as possible: [anilist graphql api](https://graphql.anilist.co)

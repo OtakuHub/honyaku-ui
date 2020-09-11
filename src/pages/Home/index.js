@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import WorkCardList from '../../components/WorkCardList';
 import getTrendingForHomepage from '../../services/queries/homePage';
+import Loading from '../../components/Loading';
 import './style.sass';
 
 class Home extends Component {
@@ -27,7 +28,7 @@ class Home extends Component {
   render() {
     const { error, anime, manga, lightnovel, hasLoaded } = this.state;
     if (!hasLoaded) {
-      return (<p>Loading content</p>);
+      return (<Loading />);
     }
     if (error) {
       return (<p>{error}</p>);
