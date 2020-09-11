@@ -37,6 +37,7 @@ class Authentication extends Component {
         </Nav.Link>
         <Modal
           show={show}
+          size="lg"
           onHide={this.handleClose}
         >
           <Modal.Header closeButton>

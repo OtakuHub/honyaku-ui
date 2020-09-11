@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 
 class Signup extends Component {
   constructor(props) {
@@ -28,78 +30,57 @@ class Signup extends Component {
       username, email, password, confirmPassword,
     } = this.state;
     return (
-      <form
-        onSubmit={this.handleSubmit}
-      >
-        <h3>Sign Up</h3>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={this.handleChange}
+            placeholder="Username"
+            name="username"
+          />
+        </Form.Group>
 
-        <div>
-          <label
-            htmlFor="username"
-          >
-            Username
-            <input
-              type="text"
-              value={username}
-              onChange={this.handleChange}
-              placeholder="Username"
-              name="username"
-            />
-          </label>
-        </div>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={this.handleChange}
+            placeholder="Enter email"
+            name="email"
+          />
+        </Form.Group>
 
-        <div>
-          <label
-            htmlFor="email"
-          >
-            Email address
-            <input
-              type="email"
-              value={email}
-              onChange={this.handleChange}
-              placeholder="Enter email"
-              name="email"
-            />
-          </label>
-        </div>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={this.handleChange}
+            placeholder="Enter password"
+            name="password"
+          />
+        </Form.Group>
 
-        <div>
-          <label
-            htmlFor="password"
-          >
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={this.handleChange}
-              placeholder="Enter password"
-              name="password"
-            />
-          </label>
-        </div>
+        <Form.Group controlId="formConfirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={confirmPassword}
+            onChange={this.handleChange}
+            placeholder="Confirm password"
+            name="confirmPassword"
+          />
+        </Form.Group>
 
-        <div>
-          <label
-            htmlFor="confirm_password"
-          >
-            Confirm Password
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={this.handleChange}
-              placeholder="Confirm password"
-              name="confirmPassword"
-            />
-          </label>
-        </div>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
 
-        <button type="submit">Sign Up</button>
-        <p>
-          Already registered
-          {' '}
-          <a href="/signin">sign in?</a>
-        </p>
-      </form>
+        <Link to="/singin"> Already registered, Sign In?</Link>
+      </Form>
     );
   }
 }

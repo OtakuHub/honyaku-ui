@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 
 class Login extends Component {
   constructor(props) {
@@ -30,57 +31,48 @@ class Login extends Component {
   render() {
     const { email, password, checked } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Sign In</h3>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Username/Email address</Form.Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={this.handleInputChange}
+            placeholder="Enter username or email address"
+            name="email"
+          />
+          <Form.Text className="text-muted">
+            We'll never share you email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-        <div>
-          <label htmlFor="email">
-            Username/Email address
-            <input
-              type="text"
-              value={email}
-              onChange={this.handleInputChange}
-              placeholder="Enter username or email address"
-              name="email"
-            />
-          </label>
-        </div>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={this.handleInputChange}
+            placeholder="Enter password"
+            name="password"
+          />
+        </Form.Group>
 
-        <div>
-          <label htmlFor="password">
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={this.handleInputChange}
-              placeholder="Enter password"
-              name="password"
-            />
-          </label>
-        </div>
+        <Form.Group controlId="formBasicCheckBox">
+          <Form.Check
+            type="checkbox"
+            label="Remember Me"
+            value={checked}
+            onChange={this.handleInputChange}
+            name="checked"
+          />
+        </Form.Group>
 
-        <div>
-          <div>
-            <label htmlFor="customCheckbox">
-              <input
-                type="checkbox"
-                id="customCheckbox"
-                value={checked}
-                onChange={this.handleInputChange}
-                name="checked"
-              />
-              Remember me
-            </label>
-          </div>
-        </div>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
 
-        <button type="submit">Submit</button>
-        <p>
-          Forgot
-          {' '}
-          <Link to="/password">password ?</Link>
-        </p>
-      </form>
+        <Link to="/password"> Forgot Password?</Link>
+      </Form>
     );
   }
 }
