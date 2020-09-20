@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/honyaku-ui/static/css/main.79990ae9.chunk.css",
-    "main.js": "/honyaku-ui/static/js/main.f5aa0f8c.chunk.js",
-    "main.js.map": "/honyaku-ui/static/js/main.f5aa0f8c.chunk.js.map",
+    "main.css": "/honyaku-ui/static/css/main.d66597a9.chunk.css",
+    "main.js": "/honyaku-ui/static/js/main.7c16ba45.chunk.js",
+    "main.js.map": "/honyaku-ui/static/js/main.7c16ba45.chunk.js.map",
     "runtime-main.js": "/honyaku-ui/static/js/runtime-main.0708831e.js",
     "runtime-main.js.map": "/honyaku-ui/static/js/runtime-main.0708831e.js.map",
-    "static/js/2.e025e942.chunk.js": "/honyaku-ui/static/js/2.e025e942.chunk.js",
-    "static/js/2.e025e942.chunk.js.map": "/honyaku-ui/static/js/2.e025e942.chunk.js.map",
+    "static/js/2.59f344c9.chunk.js": "/honyaku-ui/static/js/2.59f344c9.chunk.js",
+    "static/js/2.59f344c9.chunk.js.map": "/honyaku-ui/static/js/2.59f344c9.chunk.js.map",
     "index.html": "/honyaku-ui/index.html",
-    "precache-manifest.c7e3e2ef883e25377d633bfb3e4f14c3.js": "/honyaku-ui/precache-manifest.c7e3e2ef883e25377d633bfb3e4f14c3.js",
+    "precache-manifest.45294f870619470fca6d38b605506b07.js": "/honyaku-ui/precache-manifest.45294f870619470fca6d38b605506b07.js",
     "service-worker.js": "/honyaku-ui/service-worker.js",
-    "static/css/main.79990ae9.chunk.css.map": "/honyaku-ui/static/css/main.79990ae9.chunk.css.map",
-    "static/js/2.e025e942.chunk.js.LICENSE.txt": "/honyaku-ui/static/js/2.e025e942.chunk.js.LICENSE.txt"
+    "static/css/main.d66597a9.chunk.css.map": "/honyaku-ui/static/css/main.d66597a9.chunk.css.map",
+    "static/js/2.59f344c9.chunk.js.LICENSE.txt": "/honyaku-ui/static/js/2.59f344c9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.0708831e.js",
-    "static/js/2.e025e942.chunk.js",
-    "static/css/main.79990ae9.chunk.css",
-    "static/js/main.f5aa0f8c.chunk.js"
+    "static/js/2.59f344c9.chunk.js",
+    "static/css/main.d66597a9.chunk.css",
+    "static/js/main.7c16ba45.chunk.js"
   ]
 }
