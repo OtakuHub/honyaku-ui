@@ -1,59 +1,48 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Loading from '../../components/Loading';
 import WorkCardList from '../../components/WorkCardList';
 import getSearchResults from '../../services/queries/searchPage';
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchQuery: '',
-      results: [],
-      hasLoaded: false,
+const Search = ({ location }) => {
+  const [query, setQuery] = useState('');
+  const [response, setResponse] = useState([{
+    error: null,
+    hasLoaded: false,
+  }]);
+
+  useEffect(() => {
+    const handleSearch = async () => {
+      const res = await getSearchResults(query);
+      setResponse({ ...res });
     };
-  }
 
-  componentDidMount() {
-    this.getSearchQueryFromURL();
-  }
+    handleSearch();
+  }, [query]);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.location.search !== prevProps.location.search) {
-      this.getSearchQueryFromURL();
-    }
-  }
+  useEffect(() => {
+    const getSearchQueryFromURL = async () => {
+      const searchQuery = new URLSearchParams(location.search).get('query');
+      setQuery(searchQuery);
+    };
 
-  getSearchQueryFromURL() {
-    const { search } = this.props.location;
-    const searchQuery = new URLSearchParams(search).get('query');
-    this.setState({ searchQuery }, () => {
-      this.handleSearch();
-    });
-  }
+    getSearchQueryFromURL();
+  }, [location.search]);
 
-  async handleSearch() {
-    const response = await getSearchResults(this.state.searchQuery);
-    return this.setState({ ...response });
+  if (!response.hasLoaded) {
+    return (<Loading />);
   }
-
-  render() {
-    const { error, searchQuery, hasLoaded, results } = this.state;
-    if (!hasLoaded) {
-      return (<Loading />);
-    }
-    if (error) {
-      return (<p>{error.message}</p>);
-    }
-    return (
-      <div className="">
-        <h4>
-          Search Results:
-          <span>{searchQuery}</span>
-        </h4>
-        <WorkCardList workList={results} />
-      </div>
-    );
+  if (response.error) {
+    return (<p>{response.error.message}</p>);
   }
-}
+  return (
+    <div className="">
+      <h4>
+        Search Results:
+        <span>{query}</span>
+      </h4>
+      <WorkCardList workList={response.results} />
+    </div>
+  );
+};
 
 export default Search;

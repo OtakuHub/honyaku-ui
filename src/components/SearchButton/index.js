@@ -1,85 +1,73 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import history from '../../history';
 import Filter from '../Filter';
 import './style.sass';
 
-class SearchButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: false,
-      query: '',
-    };
-  }
+const SearchButton = () => {
+  const [show, setShow] = useState(false);
+  const [query, setQuery] = useState('');
 
-  handleShow = () => this.setState({ show: true });
+  const handleShow = () => setShow(true);
 
-  handleClose = () => this.setState({ show: false });
+  const handleClose = () => setShow(false);
 
-  handleSeach = ({ target }) => {
-    this.setState({ query: `${target.value}` });
-  }
-
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    history.push(`/search?query=${this.state.query}`);
-    this.handleClose();
-    this.setState({ query: '' });
-  }
+    history.push(`/search?query=${query}`);
+    handleClose();
+    setQuery('');
+  };
 
-  render() {
-    const { show, query } = this.state;
-    return (
-      <div>
-        <Button
-          variant="warning"
-          className="search"
-          onClick={this.handleShow}
-        >
-          Search
-        </Button>
-        <Modal show={show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Find what you are looking for</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group controlId="formSearch">
-                <Form.Label>
-                  Search
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter an anime, manga or light novel title"
-                  value={query}
-                  onChange={this.handleSeach}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Filter />
-              </Form.Group>
-              <Button
-                variant="outline-success"
-                type="submit"
-                onClick={this.handleSubmit}
-              >
+  return (
+    <div>
+      <Button
+        variant="warning"
+        className="search"
+        onClick={handleShow}
+      >
+        Search
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Find what you are looking for</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formSearch">
+              <Form.Label>
                 Search
-              </Button>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter an anime, manga or light novel title"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Filter />
+            </Form.Group>
             <Button
-              variant="outline-danger"
-              onClick={this.handleClose}
+              variant="outline-success"
+              type="submit"
+              onClick={handleSubmit}
             >
-              Close
+              Search
             </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
-}
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="outline-danger"
+            onClick={handleClose}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
 
 export default SearchButton;

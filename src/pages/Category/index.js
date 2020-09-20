@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container } from 'react-bootstrap';
 import Loading from '../../components/Loading';
 import Filter from '../../components/Filter';
@@ -7,59 +7,44 @@ import WorkCardList from '../../components/WorkCardList';
 import getCategoryWork from '../../services/queries/categoryPage';
 import './style.sass';
 
-class Category extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hasLoaded: false,
-      results: [],
+const Category = ({ match: { params }, location }) => {
+  const [response, setResponse] = useState({
+    error: null,
+    hasLoaded: false,
+  });
+
+  useEffect(() => {
+    const getTrendingMedia = async () => {
+      const workType = params.categoryName.toUpperCase();
+      const res = await getCategoryWork(workType);
+      setResponse({ ...res });
     };
+
+    getTrendingMedia();
+  }, [params.categoryName]);
+
+  if (!response.hasLoaded) {
+    return (<Loading />);
   }
 
-  componentDidMount() {
-    this.getTrendingMedia();
+  if (response.error) {
+    return (<p>{response.error.message}</p>);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.getTrendingMedia();
-    }
-  }
-
-  async getTrendingMedia() {
-    const { match: { params } } = this.props;
-    const workType = params.categoryName.toUpperCase();
-    const response = await getCategoryWork(workType);
-    return this.setState({ ...response });
-  }
-
-  render() {
-    const { error, hasLoaded, results } = this.state;
-    const { match: { params } } = this.props;
-
-    if (!hasLoaded) {
-      return (<Loading />);
-    }
-
-    if (error) {
-      return (<p>{error.message}</p>);
-    }
-
-    return (
-      <div>
-        <Jumbotron>
-          <Container>
-            <h1>
-              {`Most trending: ${params.categoryName}`}
-            </h1>
-          </Container>
-        </Jumbotron>
-        <Filter />
-        <Sort />
-        <WorkCardList workList={results} />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Jumbotron>
+        <Container>
+          <h1>
+            {`Most trending: ${params.categoryName}`}
+          </h1>
+        </Container>
+      </Jumbotron>
+      <Filter />
+      <Sort />
+      <WorkCardList workList={response.results} />
+    </div>
+  );
+};
 
 export default Category;

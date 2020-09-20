@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import handleNavigation from '../../helper/navigation';
 
 const WorkCard = ({ id, title, coverImage, description, genres }) => (
-  <Card style={{ minWidth: '15rem', marginTop: '1rem', cursor: 'pointer' }} >
+  <Card style={{ minWidth: '15rem', marginTop: '1rem', cursor: 'pointer' }}>
     <Card.Img
       style={{ height: '15rem', objectFit: 'cover' }}
       variant="top"

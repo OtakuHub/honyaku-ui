@@ -1,55 +1,48 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import WorkCardList from '../../components/WorkCardList';
 import getTrendingForHomepage from '../../services/queries/homePage';
 import Loading from '../../components/Loading';
 import './style.sass';
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      hasLoaded: false,
-      anime: [],
-      manga: [],
-      lightnovel: [],
+const Home = () => {
+  const [response, setResponse] = useState({
+    error: null,
+    hasLoaded: false,
+  });
+
+  useEffect(() => {
+    const getTrendingMedia = async () => {
+      const res = await getTrendingForHomepage();
+      setResponse({ ...res });
     };
+
+    getTrendingMedia();
+  }, []);
+
+  if (!response.hasLoaded) {
+    return (<Loading />);
   }
 
-  componentDidMount() {
-    this.getTrendingMedia();
+  if (response.error) {
+    return (<p>{response.error.message}</p>);
   }
 
-  async getTrendingMedia() {
-    const response = await getTrendingForHomepage();
-    return this.setState({ ...response });
-  }
-
-  render() {
-    const { error, anime, manga, lightnovel, hasLoaded } = this.state;
-    if (!hasLoaded) {
-      return (<Loading />);
-    }
-    if (error) {
-      return (<p>{error}</p>);
-    }
-    return (
-      <div>
-        <div className="section">
-          <h4>Light Novels</h4>
-          <WorkCardList workList={lightnovel} />
-        </div>
-        <div className="section">
-          <h4>Manga</h4>
-          <WorkCardList workList={manga} />
-        </div>
-        <div className="section">
-          <h4>Anime</h4>
-          <WorkCardList workList={anime} />
-        </div>
+  return (
+    <div>
+      <div className="section">
+        <h4>Light Novels</h4>
+        <WorkCardList workList={response.lightnovel} />
       </div>
-    );
-  }
-}
+      <div className="section">
+        <h4>Manga</h4>
+        <WorkCardList workList={response.manga} />
+      </div>
+      <div className="section">
+        <h4>Anime</h4>
+        <WorkCardList workList={response.anime} />
+      </div>
+    </div>
+  );
+};
 
 export default Home;

@@ -4,11 +4,7 @@ import './style.sass';
 
 const Loading = () => (
   <div className="spinner">
-    <Spinner
-      animation="grow"
-      role="status"
-      variant="primary"
-    >
+    <Spinner animation="grow" role="status" variant="primary">
       <span className="sr-only">Loading...</span>
     </Spinner>
   </div>
