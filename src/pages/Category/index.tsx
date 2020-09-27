@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container } from 'react-bootstrap';
+import { RouteComponentProps } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import Filter from '../../components/Filter';
 import Sort from '../../components/Sorting';
@@ -7,8 +8,13 @@ import WorkCardList from '../../components/WorkCardList';
 import getCategoryWork from '../../services/queries/categoryPage';
 import './style.sass';
 
-const Category = ({ match: { params }, location }) => {
+type TParams = {
+  categoryName: string;
+}
+
+const Category: React.FC<RouteComponentProps<TParams>> = ({ match: { params }, location }) => {
   const [response, setResponse] = useState({
+    results: [],
     error: null,
     hasLoaded: false,
   });
@@ -35,9 +41,7 @@ const Category = ({ match: { params }, location }) => {
     <div>
       <Jumbotron>
         <Container>
-          <h1>
-            {`Most trending: ${params.categoryName}`}
-          </h1>
+          <h1>{`Most trending: ${params.categoryName}`}</h1>
         </Container>
       </Jumbotron>
       <Filter />

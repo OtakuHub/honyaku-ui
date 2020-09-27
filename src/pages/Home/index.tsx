@@ -8,6 +8,9 @@ const Home = () => {
   const [response, setResponse] = useState({
     error: null,
     hasLoaded: false,
+    lightnovel: [],
+    anime: [],
+    manga: []
   });
 
   useEffect(() => {

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import WorkCardList from '../../components/WorkCardList';
 import getSearchResults from '../../services/queries/searchPage';
 
-const Search = ({ location }) => {
+const Search: React.FC<RouteComponentProps> = ({ location }) => {
   const [query, setQuery] = useState('');
-  const [response, setResponse] = useState([{
+  const [response, setResponse] = useState({
     error: null,
     hasLoaded: false,
-  }]);
+    results: []
+  });
 
   useEffect(() => {
     const handleSearch = async () => {

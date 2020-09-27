@@ -35,20 +35,31 @@ fragment cardFieldItems on Media {
 }
 `;
 
-const getTrendingForHomepage = async () => {
+interface Response {
+  error: string | null;
+  hasLoaded: boolean;
+  anime: Array<Object>;
+  manga: Array<Object>;
+  lightnovel: Array<Object>;
+}
+
+const getTrendingForHomepage = async (): Promise<Response> => {
   try {
-    const response = await api.post('/', { query });
+    const { data } = await api.post('/', { query });
     return {
       error: null,
-      anime: response.data.data.anime.media,
-      manga: response.data.data.manga.media,
-      lightnovel: response.data.data.lightnovel.media,
+      anime: data.data.anime.media,
+      manga: data.data.manga.media,
+      lightnovel: data.data.lightnovel.media,
       hasLoaded: true,
     };
   } catch (error) {
     return {
       error,
       hasLoaded: true,
+      anime: [],
+      manga: [],
+      lightnovel: []
     };
   }
 };
