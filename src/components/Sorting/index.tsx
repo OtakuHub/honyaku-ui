@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
-const Sort = () => {
-  const [sortOptions] = useState([
+interface SortingOptions {
+  value: string;
+  displayName: string;
+}
+
+const Sort: React.FC = (): ReactElement => {
+  const [sortOptions] = useState<Array<SortingOptions>>([
     { value: 'defult', displayName: 'Default' },
     { value: 'date', displayName: 'Date' },
     { value: 'liked', displayName: 'Most Liked' },
@@ -12,8 +17,10 @@ const Sort = () => {
     <div>
       <label htmlFor="sorting">Sort</label>
       <select name="sorting" id="sort">
-        {sortOptions.map((sorts) => (
-          <option value={sorts.value}>{sorts.displayName}</option>
+        {sortOptions.map(({ value, displayName }) => (
+          <option key={value} value={value}>
+            {displayName}
+          </option>
         ))}
       </select>
     </div>

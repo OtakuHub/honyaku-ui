@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Button, Tab, Modal, Nav, Tabs } from 'react-bootstrap';
 import Login from '../Login';
 import Signup from '../SignUp';
 
-const AuthNav = ({ loggedIn }) => {
-  const [show, setShow] = useState(false);
+interface Props {
+  loggedIn: boolean;
+}
 
-  const handleShow = (event) => {
+const AuthNav: React.FC<Props> = ({ loggedIn }): ReactElement => {
+  const [show, setShow] = useState<boolean>(false);
+
+  const handleShow = (event: React.MouseEvent) => {
     event.preventDefault();
     setShow(true);
   };
@@ -24,8 +28,6 @@ const AuthNav = ({ loggedIn }) => {
         </Modal.Header>
         <Modal.Body>
           <Tabs
-            tabPosition="top"
-            tabBarGutter={100}
             style={{
               flex: 0,
               flexDirection: 'row',

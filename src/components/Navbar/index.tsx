@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import AuthNav from '../AuthNav';
 import handleNavigation from '../../helper/navigation';
 import './style.sass';
 
-const NavigationBar = () => {
-  const [loggedIn] = useState(false);
-  const [categories] = useState([
+interface Categories {
+  link: string;
+  name: string;
+}
+
+const NavigationBar: React.FC = (): ReactElement => {
+  const [loggedIn] = useState<boolean>(false);
+  const [categories] = useState<Array<Categories>>([
     { link: '/category/anime', name: 'Anime' },
     { link: '/category/manga', name: 'Manga' },
     { link: '/category/lightnovel', name: 'Light Novel' },

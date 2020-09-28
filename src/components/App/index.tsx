@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Home from '../../pages/Home';
@@ -9,7 +9,7 @@ import Navbar from '../Navbar';
 import SearchButton from '../SearchButton';
 import './style.sass';
 
-const App = () => (
+const App: React.FC = (): ReactElement => (
   <div>
     <Navbar />
     <SearchButton />

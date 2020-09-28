@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import history from '../../history';
 import Filter from '../Filter';
 import './style.sass';
 
-const SearchButton = () => {
-  const [show, setShow] = useState(false);
-  const [query, setQuery] = useState('');
+const SearchButton: React.FC = (): ReactElement => {
+  const [show, setShow] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>('');
 
   const handleShow = () => setShow(true);
 
   const handleClose = () => setShow(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     history.push(`/search?query=${query}`);
     handleClose();

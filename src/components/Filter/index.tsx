@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
-const Filter = () => {
-  const [filters] = useState([
+interface filters {
+  value: string;
+  displayName: string;
+}
+
+const Filter: React.FC = (): ReactElement => {
+  const [filters] = useState<Array<filters>>([
     { value: 'genre', displayName: 'Select Genre' },
     { value: 'action', displayName: 'Action' },
     { value: 'adventure', displayName: 'Adventure' },
@@ -16,8 +21,10 @@ const Filter = () => {
     <div>
       <label htmlFor="filter">Filter</label>
       <select name="filter" id="genrefilter">
-        {filters.map((filter) => (
-          <option value={filter.value}>{filter.displayName}</option>
+        {filters.map(({ value, displayName }) => (
+          <option key={value} value={value}>
+            {displayName}
+          </option>
         ))}
       </select>
     </div>

@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Card } from 'react-bootstrap';
 import handleNavigation from '../../helper/navigation';
 
-const WorkCard = ({ id, title, coverImage, description, genres }) => (
+interface Props {
+  id: string;
+  title: string;
+  coverImage: string;
+  description: string;
+  genres: Array<string>;
+}
+
+const WorkCard: React.FC<Props> = ({ id, title, coverImage, description, genres }): ReactElement => (
   <Card style={{ minWidth: '15rem', marginTop: '1rem', cursor: 'pointer' }}>
     <Card.Img
       style={{ height: '15rem', objectFit: 'cover' }}
@@ -14,7 +22,7 @@ const WorkCard = ({ id, title, coverImage, description, genres }) => (
         {title}
       </Card.Title>
       <Card.Subtitle>
-        {genres}
+        {genres.join(', ')}
       </Card.Subtitle>
       <Card.Text
         dangerouslySetInnerHTML={{ __html: description.substring(0, 100) }}

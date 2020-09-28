@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [checked, setChecked] = useState(false);
+type CheckboxEvent = React.ChangeEvent<HTMLInputElement>;
 
-  const handleSubmit = (event) => {
-    alert(`Username ${email} has logged in.`);
+const Login: React.FC = (): ReactElement => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [checked, setChecked] = useState<boolean | string>(false);
+
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    alert(`Username ${email} has logged in.`);
   };
 
   return (
@@ -33,7 +35,7 @@ const Login = () => {
         <Form.Control
           type="password"
           value={password}
-          onChange={(event) => setPassword(event.target.password)}
+          onChange={(event) => setPassword(event.target.value)}
           placeholder="Enter password"
           name="password"
         />
@@ -43,8 +45,8 @@ const Login = () => {
         <Form.Check
           type="checkbox"
           label="Remember Me"
-          value={checked}
-          onChange={(event) => setChecked(event.target.checked)}
+          value={checked as string}
+          onChange={(event: CheckboxEvent) => setChecked(event.target.checked)}
           name="checked"
         />
       </Form.Group>

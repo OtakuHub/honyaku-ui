@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
-const Signup = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+const Signup: React.FC = (): ReactElement => {
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const handleSubmit = (event) => {
-    alert(`Username ${username} has signed up.`);
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    alert(`Username ${username} has signed up.`);
   };
 
   return (
